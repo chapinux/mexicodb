@@ -1,11 +1,11 @@
 DB_HOST := localhost
 DB_PORT := 5432
 DB_USER := postgres
-DB_PASSWORD := mexicoigast
+DB_PASSWORD := xxxxxxxxxxxxxxxxx
 DB_NAME := mexico
 
 DB_NUSER := m2igast
-DB_NUSER_PWD := 'xxxxxxxxxxxxxxxxx'
+DB_NUSER_PWD := xxxxxxxxxxxxxxxxx
 
 DATA_FOLDER := ./data
 SQL_FOLDER := ./sql
@@ -24,7 +24,7 @@ finitions: add_constraints add_grant
 
 create_db:
 	 $(PSQL) -c "CREATE DATABASE $(DB_NAME);"
-	 $(PSQL) -d $(DB_NAME) -c "CREATE EXTENSION postgis ;"
+	 $(PSQL) -d $(DB_NAME) -c "CREATE EXTENSION postgis;"
 
 create_user:
 	 $(PSQL) -d $(DB_NAME) -c "CREATE USER $(DB_NUSER) WITH ENCRYPTED PASSWORD $(DB_NUSER_PWD);"
@@ -41,7 +41,7 @@ convert_shp:
 
 populate_tables:
 	 $(PSQL) -d $(DB_NAME) -f $(SQL_FOLDER)/populate_tables.sql
-	 $(PSQL) -d $(DB_NAME) -c "\copy dataset_2015 FROM '$(DATA_FOLDER)/mexico2015_NA_insteadof_NIU.csv'  WITH (FORMAT CSV, DELIMITER ',', NULL 'NA', HEADER);"
+	 $(PSQL) -d $(DB_NAME) -c "\copy dataset_2015 FROM '$(DATA_FOLDER)/mexico2015_NA_insteadof_NIU.csv' WITH (FORMAT CSV, DELIMITER ',', NULL 'NA', HEADER);"
 
 populate_geographic_tables:
 	shp2pgsql -W LATIN1 -a -s 4326 $(SHP_FOLDER)/geo2_mx1960_2015 public.mexico_lvl2 > $(SQL_SHP_FOLDER)/mexico_lvl2.sql
@@ -49,8 +49,6 @@ populate_geographic_tables:
 
 add_constraints:
 	 $(PSQL) -d $(DB_NAME) -f $(SQL_FOLDER)/constraints.sql
-
-
 
 add_grant:
 	$(PSQL) -d $(DB_NAME) -c "GRANT SELECT ON ALL TABLES IN SCHEMA public TO $(DB_NUSER);"
