@@ -1,119 +1,12 @@
+#!/usr/bin/Rscript
+
+https://www.rdocumentation.org/packages/R.utils/versions/2.9.0/topics/commandArgs
+
+args = commandArgs(trailingOnly=TRUE)
+
 library(data.table)
 library(dplyr)
 library(sf)
-
-#   start_timeFread <- Sys.time()
-#   df2 <-  fread("/media/paulchapron/Data/Mexique_IGAST/ipumsi_00028.csv",sep = ",")
-#   end_timeFread <- Sys.time()
-#  
-#  df2 <-  df2 %>% filter(YEAR==2015)
-#  
-#  
-# #netoyage des colonnes inutiles
-# 
-#  all(df2$COUNTRY == 484)
-#  all(df2$YEAR == 2015)
-# 
-#  df2$YEAR <-  NULL
-#  df2$COUNTRY <- NULL
-# 
-#  df2$GEO1_MX1990 <- NULL
-#  df2$GEO1_MX1995 <- NULL
-#  df2$GEO1_MX2000 <- NULL
-#  df2$GEO1_MX2005 <- NULL
-#  df2$GEO1_MX2010 <- NULL
-# 
-# 
-#  df2$GEO2_MX1990 <- NULL
-#  df2$GEO2_MX1995 <- NULL
-#  df2$GEO2_MX2000 <- NULL
-#  df2$GEO2_MX2005 <- NULL
-#  df2$GEO2_MX2010 <- NULL
-# 
-#  df2$V1 <- NULL
-# 
-# head(df2)
-# 
-# 
-#  df2$GEO1_MX2015 <- NULL
-#  df2$GEO2_MX2015 <- NULL
-# 
-#  write.csv(df2,"/media/paulchapron/Data/Mexique_IGAST/mexico2015.csv", row.names = F)
-
-
- 
- 
-
- #####################
-## valeurs manquantes (NIU, 999) etc
- #####################
- 
- 
-#  df2 <-  fread("/media/paulchapron/Data/Mexique_IGAST/mexico2015.csv",na.strings = "NIU")
-# 
-# 
-# df2 %>% filter(AGE2==99) %>%  nrow()
-# df2$AGE2 <-  na_if(df2$AGE2, 99)
-# df2 %>% filter(AGE2==99) %>%  nrow()
-# 
-# df2 %>% filter(SCHOOL==0) %>%  nrow()
-# df2$SCHOOL <-  na_if(df2$SCHOOL, 0)
-# df2 %>% filter(SCHOOL==0) %>%  nrow()
-# 
-# df2 %>% filter(LIT==0) %>%  nrow()
-# df2$LIT <-  na_if(df2$LIT, 0)
-# df2 %>% filter(LIT==0) %>%  nrow()
-# 
-# df2 %>% filter(EDATTAIN==0) %>%  nrow()
-# df2$EDATTAIN <-  na_if(df2$EDATTAIN, 0)
-# df2 %>% filter(EDATTAIN==0) %>%  nrow()
-# 
-# df2 %>% filter(EDATTAIND==000) %>%  nrow()
-# df2$EDATTAIND <-  na_if(df2$EDATTAIND, 000)
-# df2 %>% filter(EDATTAIND==000) %>%  nrow()
-# 
-# df2 %>% filter(YRSCHOOL==99) %>%  nrow()
-# df2$YRSCHOOL <-  na_if(df2$YRSCHOOL, 99)
-# df2 %>% filter(YRSCHOOL==99) %>%  nrow()
-# 
-# df2 %>% filter(EDUCMX==999) %>%  nrow()
-# df2$EDUCMX <-  na_if(df2$EDUCMX, 999)
-# df2 %>% filter(EDUCMX==999) %>%  nrow()
-# 
-# df2 %>% filter(MIGMX2==00) %>%  nrow()
-# df2$MIGMX2 <-  na_if(df2$MIGMX2, 00)
-# df2 %>% filter(MIGMX2==00) %>%  nrow()
-# 
-# df2 %>% filter(FLOOR==000) %>%  nrow()
-# df2$FLOOR <-  na_if(df2$FLOOR, 000)
-# df2 %>% filter(FLOOR==000) %>%  nrow()
-# 
-# df2 %>% filter(TOILET==00) %>%  nrow()
-# df2$TOILET <-  na_if(df2$TOILET, 00)
-# df2 %>% filter(TOILET==00) %>%  nrow()
-# 
-# df2 %>% filter(BEDROOMS==99) %>%  nrow()
-# df2$BEDROOMS <-  na_if(df2$BEDROOMS, 99)
-# df2 %>% filter(BEDROOMS==99) %>%  nrow()
-# 
-# df2 %>% filter(ROOMS==99) %>%  nrow()
-# df2$ROOMS <-  na_if(df2$ROOMS, 99)
-# df2 %>% filter(ROOMS==99) %>%  nrow()
-# 
-# df2 %>% filter(SEWAGE==00) %>%  nrow()
-# df2$SEWAGE <-  na_if(df2$SEWAGE, 00)
-# df2 %>% filter(SEWAGE==00) %>%  nrow()
-# 
-# df2 %>% filter(WATSUP==00) %>%  nrow()
-# df2$WATSUP <-  na_if(df2$WATSUP, 00)
-# df2 %>% filter(WATSUP==00) %>%  nrow()
-# 
-# df2 %>% filter(ELECTRIC==0) %>%  nrow()
-# df2$ELECTRIC <-  na_if(df2$ELECTRIC, 0)
-# df2 %>% filter(ELECTRIC==0) %>%  nrow()
-
-
-# write.csv(df2,"/media/paulchapron/Data/Mexique_IGAST/mexico2015_NA_insteadof_NIU.csv", row.names = F)
 
 
 df2 <-  fread("/media/paulchapron/Data/Mexique_IGAST/mexico2015_NA_insteadof_NIU.csv")
