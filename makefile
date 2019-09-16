@@ -1,22 +1,26 @@
 DB_HOST := localhost
 DB_PORT := 5432
 DB_USER := postgres
-DB_PASSWORD := xxxxxxxxxxxxxxxxx
+DB_PASSWORD := xxxxxxxxxxxxxxxxxx
 DB_NAME := mexico
 
 DB_NUSER := m2igast
-DB_NUSER_PWD := xxxxxxxxxxxxxxxxx
+DB_NUSER_PWD := xxxxxxxxxxxxxxxxxx
 
 DATA_FOLDER := ./data
 SQL_FOLDER := ./sql
 SHP_FOLDER := $(DATA_FOLDER)/shp
 SQL_SHP_FOLDER := $(DATA_FOLDER)/ssql
 
+EXIST_CLEANED_FILES := $([ -f "./data/cleaned_census.csv" ] || pretraitment)
+
+
+
 R_FOLDER := ./R
 
 PSQL := PGPASSWORD=$(DB_PASSWORD) psql -h $(DB_HOST) -p $(DB_PORT) -U $(DB_USER)
 
-all: pretraitment create populate finitions
+all: $(EXIST_CLEANED_FILES) create populate finitions
 
 pretraitment: spliting_data cleaning_data
 
@@ -26,10 +30,9 @@ populate: populate_tables populate_geographic_tables
 
 finitions: add_constraints add_grant
 
-spliting_data:
+spliting_data: 																																																																																																																																																																																																																																																																																																														
 	$(R_FOLDER)/spliting.r -f $(DATA_FOLDER)/ipumsi_00028.csv -o $(DATA_FOLDER)/splited.csv
-
-cleaning_data:
+cleaning_data: spliting_data
 	$(R_FOLDER)/cleaning.r -f $(DATA_FOLDER)/splited.csv -o $(DATA_FOLDER)/cleaned_census.csv
 
 create_db:

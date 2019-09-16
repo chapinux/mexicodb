@@ -26,7 +26,6 @@ names(mexicoshp)
 
 
 ## couverture des données
-varz
   varz <- c("ELECTRIC","WATSUP" , "SEWAGE"  , "ROOMS" ,  "BEDROOMS", "TOILET" ,  "FLOOR"  ,  "PERNUM",    
  "PERWT"  , "RELATE" ,  "RELATED" , "AGE" ,   "AGE2"  , "SEX" , "SCHOOL", "LIT", "EDATTAIN" , "EDATTAIND" , "YRSCHOOL"  , "EDUCMX"   ,"MIGMX2"  ) 
 dfEffectif_by_GEO2 <-  df2 %>% 

@@ -30,8 +30,8 @@ df2 <-  df2 %>% filter(YEAR==2015)
 
 #netoyage des colonnes inutiles
 
-all(df2$COUNTRY == 484)
-all(df2$YEAR == 2015)
+# all(df2$COUNTRY == 484)
+# all(df2$YEAR == 2015)
 
 df2$YEAR <-  NULL
 df2$COUNTRY <- NULL
@@ -52,5 +52,4 @@ df2$V1 <- NULL
 
 df2$GEO1_MX2015 <- NULL
 df2$GEO2_MX2015 <- NULL
-
 write.csv(df2, opt$out, row.names = F)
