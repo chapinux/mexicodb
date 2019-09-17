@@ -96,7 +96,6 @@ add_constraints:
 add_grant:
 	$(PSQL) -d $(DB_NAME) -c "GRANT SELECT ON ALL TABLES IN SCHEMA public TO $(DB_NUSER);"
 
-
 # Cleaning targets
 # ========================================
 
