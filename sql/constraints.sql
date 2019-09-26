@@ -1,6 +1,5 @@
 BEGIN;
 
-
 -- Unicity Constraint
 ALTER TABLE states2015
   ADD CONSTRAINT unique_geolevel1
@@ -81,18 +80,16 @@ UNIQUE (state_5yearsago);
 
 
 -- Forgein Key
-ALTER TABLE mexico_lvl2 
-  ADD CONSTRAINT state2015_fkey
-  FOREIGN KEY (parent)
-  REFERENCES states2015 (GEO1_MX);
 
+-- ALTER TABLE mexico_lvl2 
+--   ADD CONSTRAINT state2015_fkey
+--   FOREIGN KEY (parent)
+--   REFERENCES states2015 (GEO1_MX);
 
-ALTER TABLE dataset_2015
-	ADD CONSTRAINT GEO2_MX_fkey
-	FOREIGN KEY (GEO2_MX) 
-	REFERENCES mexico_lvl2 (geolevel2);
-
-
+-- ALTER TABLE dataset_2015
+--   ADD CONSTRAINT GEO2_MX_fkey
+--   FOREIGN KEY (GEO2_MX) 
+--   REFERENCES mexico_lvl2 (geolevel2);
 
 ALTER TABLE dataset_2015 
   ADD CONSTRAINT geo1_fkey
@@ -113,11 +110,6 @@ ALTER TABLE dataset_2015
   ADD CONSTRAINT rooms_fkey
   FOREIGN KEY (rooms)
   REFERENCES rooms (rooms);
-
-ALTER TABLE dataset_2015 
-  ADD CONSTRAINT bedrooms_fkey
-  FOREIGN KEY (bedrooms)
-  REFERENCES bedrooms (bedrooms);
 
 ALTER TABLE dataset_2015 
   ADD CONSTRAINT bedrooms_fkey
@@ -193,8 +185,5 @@ ALTER TABLE dataset_2015
   ADD CONSTRAINT migmx2_fkey
   FOREIGN KEY (MIGMX2)
   REFERENCES state_5yearsago (state_5yearsago);
-
-
-
 
 COMMIT;
