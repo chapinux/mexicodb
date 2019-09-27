@@ -19,14 +19,20 @@ SQL_SHP_FOLDER := $(DATA_FOLDER)/ssql
 # psql macro
 PSQL := @PGPASSWORD=$(DB_PASSWORD) psql -q -h $(DB_HOST) -p $(DB_PORT) -U $(DB_USER)
 
-# Data previously cleaned ?
-EXIST_CLEANED_FILES := $([ -f "./data/cleaned_census.csv" ] || pretraitment)
+ALL_TARGET := create populate finitions
+
 
 # Principal Target (call by 'make' without parameters)
 # ====================================================
 
 # 'pretraitment' target is call if the 'cleand_census.csv' file does not exists
-all: $(EXIST_CLEANED_FILES) create populate finitions
+ifeq ("$(wildcard $(DATA_FOLDER)/cleaned_census.csv)","")
+	ALL_TARGET := pretraitment $(ALL_TARGET)
+endif
+
+
+all: $(ALL_TARGET)
+
 
 # Secondary targets (call by 'all' target)
 # ========================================
@@ -43,6 +49,7 @@ populate: populate_tables populate_geographic_tables
 
 # 'finitions' target ; add grant and constraints in the database
 finitions: add_constraints add_grant
+
 
 # Tertiary targets (call by secondary targets)
 # ========================================
@@ -117,6 +124,7 @@ add_grant:
 	@echo -n '[Postgres] Add grant: '
 	$(PSQL) -d $(DB_NAME) -c "GRANT SELECT ON ALL TABLES IN SCHEMA public TO $(DB_NUSER);"
 	@echo 'Done'
+
 
 # Cleaning targets
 # ========================================
